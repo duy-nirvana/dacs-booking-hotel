@@ -95,7 +95,7 @@ router.patch('/:id', UserCtrl.authMiddleware, (req, res) => {
                 return res.status(422).send({errors: normalizeErrors(error.errors)});
 
             if(user.id !== foundRental.user.id)
-                return res.status(422).send(createErrorObject('Invalid User!','You are not rental Owner'));
+                return res.status(422).send(createErrorObject('Invalid User!','Bạn không phải là chủ phòng này!'));
 
             foundRental.set(rentalData);
             foundRental.save((err) => {
