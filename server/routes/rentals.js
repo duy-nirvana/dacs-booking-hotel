@@ -4,6 +4,7 @@ const Rental = require('../models/rental');
 const UserCtrl = require('../controllers/userRouteFunction');
 const { normalizeErrors } = require('../helper/errorParser');
 const User = require('../models/user');
+const controller = require('../controllers/rentals.controller');
 
 router.get('',(req,res) => {
     const city = req.query.city;
@@ -23,6 +24,8 @@ router.get('',(req,res) => {
             return res.json(filterRentals);
         })
 });
+
+router.get('/view', controller.view);
 
 router.get('/manage', UserCtrl.authMiddleware, (req, res) => {
     const user = res.locals.user;
