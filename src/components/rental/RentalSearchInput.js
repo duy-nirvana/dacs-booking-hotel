@@ -12,6 +12,7 @@ class RentalSearchInput extends Component {
     handleSearch() {
         const { history } = this.props;
         const city = this.searchInput.current.value;
+        
 
         city ? history.push(`/rentals/${city}/homes`): history.push('/rentals');
     }

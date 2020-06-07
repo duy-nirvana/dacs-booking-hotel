@@ -7,7 +7,7 @@ const RentalCard = (props) =>  {
     const rental = props.rental;
 
     return (
-        <div className="col-md-3 col-xs-6 ">
+        <div className="col-md-3 col-6">
         <Link className='rental-detail-link rental-card'  to={`/rentals/${rental._id}`}>
                 <div className='card bwm-card border p-4'>
                     <img className='card-img-top' src={rental.image} alt={rental.title}/>

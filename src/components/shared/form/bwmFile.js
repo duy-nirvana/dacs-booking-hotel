@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
 
-export default class BwmFile extends Component {
+export default class bwmFile extends Component {
 
     constructor() {
         super();
 
         this.onChange = this.onChange.bind(this);
+        this.state = {
+            selectedFile: null,
+        }
     }
 
     onChange(event){
         const { input: {onChange} } = this.props;
 
-        onChange('https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg');
+        onChange('https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/12/image.jpeg');
+        // console.log(event.target.files[0])
+        // this.setState({
+        //     selectedFile: 
+        // })
     }
 
     render() {

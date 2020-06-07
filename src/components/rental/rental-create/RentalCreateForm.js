@@ -6,7 +6,7 @@ import { require } from '../../shared/form/validators';
 import { BwmResError } from './../../shared/form/bwmResError';
 import { bwmTextArea } from './../../shared/form/BwmTextArea';
 import { bwmSelect } from './../../shared/form/bwmSelect';
-import BwmFile from './../../shared/form/bwmFile';
+import bwmFile from './../../shared/form/bwmFile';
 
 const CreateRentalForm = props => {
     const { handleSubmit, pristine, submitting, valid, createRental ,errors, options } = props
@@ -61,7 +61,7 @@ const CreateRentalForm = props => {
             <Field
                 name="image"
                 label="Hình ảnh"
-                component={BwmFile}
+                component={bwmFile}
                 validate={[require]}
             />
 
@@ -96,6 +96,6 @@ export default reduxForm({
     form: 'createRentalForm',
     initialValues: {
         shared: false,
-        category: 'apartment'
+        category: 'hotel'
     }
 })(CreateRentalForm)
