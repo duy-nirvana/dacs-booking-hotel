@@ -6,7 +6,7 @@ import avatar from '../../../../styles/img/avatar.png';
 export const RentalDetailInfo = (props) =>  {
     const rental  = props.rental;
     return (
-        <div className='rental '>
+        <div className='rental'>
             <h2 className={`rental-type font-weight-bold text-danger ${rental.category}`}>{rentalType(rental.shared)} {rental.category}</h2>
 
             <div className='rental-owner'>

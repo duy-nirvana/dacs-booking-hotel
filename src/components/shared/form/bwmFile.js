@@ -5,7 +5,6 @@ export default class bwmFile extends Component {
 
     constructor() {
         super();
-
         this.onChange = this.onChange.bind(this);
         this.state = {
             selectedFile: null,

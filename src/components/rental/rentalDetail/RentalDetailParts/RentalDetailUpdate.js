@@ -31,18 +31,7 @@ class RentalDetailUpdate extends Component {
         const { rental, errors} = this.props;
         return (
             <div className='rental'>
-                {/* <ToastContainer />
-                <label className={`rental-label rental-type ${rental.category}`}> Shared </label>
-                <EditableSelect 
-                    entity={rental} 
-                    entityField={'shared'} 
-                    className={`rental-type ${rental.category}`}
-                    updateEntity={this.updateRental}
-                    options={[true, false]}
-                    containerStyle={{'display':'inline-block'}}
-                    errors={errors}
-                    resetErrorsFunc={this.resetRentalErrors}
-                    />  */}
+             
                 <EditableSelect 
                     entity={rental} 
                     entityField={'category'} 

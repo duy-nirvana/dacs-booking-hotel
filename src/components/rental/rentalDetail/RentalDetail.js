@@ -18,7 +18,10 @@ class RentalDetail extends Component {
             isFetching: true
         }
         this.verifyRentalOwner = this.verifyRentalOwner.bind(this);
+        
     }
+
+  
 
     componentWillMount() {
         // Dispatch action
@@ -27,7 +30,7 @@ class RentalDetail extends Component {
     }
 
     componentDidMount() {
-
+        
         const { isUpdate } = this.props.location.state || false;
         if(isUpdate) this.verifyRentalOwner();
     }
@@ -56,13 +59,23 @@ class RentalDetail extends Component {
     render() {
         
         const { rental, errors } = this.props;
+
+        const imageUrl = (pathString) => {
+            const paths = pathString.split("/");
+            let fileName = paths[paths.length - 1];
+            fileName = "http://localhost:3000/api/v1/files/" + fileName;
+            console.log("fileName: ", fileName);
+    
+            return fileName;
+        }
+        
         if(rental._id){
             return (
                 <section id='rentalDetails'>
                     <div className='upper-section'>
                         <div className='row'>
                             <div className='col-md-4'>
-                                <img src={rental.image} alt=''/>
+                                <img src={imageUrl(rental.image)} alt=''/>
                             </div>
                             
                         </div>
