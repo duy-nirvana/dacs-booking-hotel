@@ -4,9 +4,15 @@ const Rental = require('../models/rental');
 const UserCtrl = require('../controllers/userRouteFunction');
 const { normalizeErrors } = require('../helper/errorParser');
 const User = require('../models/user');
+const multer = require("multer");
+const pathNode = require("path");
 const controller = require('../controllers/rentals.controller');
 
-router.get('',(req,res) => {
+const upload = multer({
+    dest: pathNode.join(__dirname, "../uploads"),
+});
+
+router.get('/',(req,res) => {
     const city = req.query.city;
     const query = city ? { city: city.toLowerCase() } : {}
 
@@ -71,18 +77,22 @@ router.get('/:id/verify-user', UserCtrl.authMiddleware, (req,res) => {
 
 });
 
-router.post('', UserCtrl.authMiddleware, (req, res) => {
-    const { title, street, city, category, image, bedrooms, shared, description, dailyRate } = req.body;
-    const newRental = new Rental({ title, street, city, category, image, bedrooms, shared, description, dailyRate });
-    const user = res.locals.user;
-    newRental.user = user;
-    Rental.create(newRental, (error, rental) => {
-        if(error)
-            return res.status(422).send({errors: normalizeErrors(error.errors)});
-
-        User.updateOne({_id: user.id},{$push: {rentals: rental}},(error, data) => {});
-        return res.json(rental);
-    })
+router.post('/', upload.single("image"), UserCtrl.authMiddleware, async (req, res, next) => {
+    const image = req.file.path;
+    const { title, street, city, category, bedrooms, shared, description, dailyRate } = req.body;
+        const newRental = new Rental({ title, street, city, category, image, bedrooms, shared, description, dailyRate });
+        const user = res.locals.user;
+        newRental.user = user;
+        await Rental.create(newRental, async (error, rental) => {
+            if(error) {
+                console.log("error: ", error);
+                return res.status(422).send({errors: normalizeErrors(error.errors)});
+            }
+    
+            await User.updateOne({_id: user.id},{$push: {rentals: rental}},(error, data) => {});
+            return res.json(rental);
+        })
+   
 });
 
 router.patch('/:id', UserCtrl.authMiddleware, (req, res) => {
@@ -126,10 +136,10 @@ router.delete('/:id', UserCtrl.authMiddleware, (req, res) => {
             return res.status(422).send({errors: normalizeErrors(error.errors)});
 
         if(user.id !== foundRental.user.id)
-            return res.status(422).send(createErrorObject('Invalid User!','You are not rental Owner'));
+            return res.status(422).send(createErrorObject('Invalid User!', 'Bạn không phải là chủ sở hữu phòng này'));
 
         if(foundRental.bookings.length > 0)
-            return res.status(422).send(createErrorObject('Active Bookings!','Could not delete rental with active bookings!'));
+            return res.status(422).send(createErrorObject('Active Bookings!','Không thể xóa phòng'));
         
         foundRental.remove((error) => {
             if(error)

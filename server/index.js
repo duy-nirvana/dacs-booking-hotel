@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const Rental = require('./models/rental');
 const FakeDb = require('./fake-db');
+const multer = require("multer");
+const pathNode = require("path");
 
 const bodyParser = require('body-parser');
 
@@ -30,6 +32,14 @@ app.use(bodyParser.json());
 app.use('/api/v1/rentals',rentalRoutes);
 app.use('/api/v1/users',userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+
+app.get("/api/v1/files/:name", (req, res, next) => {
+    const filePath = pathNode.join(__dirname, "uploads", req.params.name);
+    console.log("filePath: ", filePath);
+    
+    res.download(filePath);
+
+})
 
 if(process.env.NODE_ENV === 'production'){
     const appPath = path.join(__dirname, '..', 'build');

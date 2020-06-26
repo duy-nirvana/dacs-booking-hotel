@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
 
 export default class bwmFile extends Component {
 
@@ -13,12 +14,7 @@ export default class bwmFile extends Component {
 
     onChange(event){
         const { input: {onChange} } = this.props;
-
-        onChange('https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/12/image.jpeg');
-        // console.log(event.target.files[0])
-        // this.setState({
-        //     selectedFile: 
-        // })
+        onChange(event.target.files[0]);
     }
 
     render() {
@@ -31,7 +27,7 @@ export default class bwmFile extends Component {
                 <div className="input-group">
                     <input 
                         type='file' 
-                        accept='.jpg, .png, .jpeg' 
+                        accept='.jpg, .png, .jpeg'
                         onChange={this.onChange} 
                     />
                 </div>

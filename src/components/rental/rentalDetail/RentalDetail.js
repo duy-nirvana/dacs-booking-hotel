@@ -71,7 +71,7 @@ class RentalDetail extends Component {
                     <div className='details-section'>
                         <div className='row'>
                             <div className='col-md-8'>
-                                {  this.renderRentalDetail(rental, errors)    }                                
+                                {  this.renderRentalDetail(rental, errors)  }                                
                             </div>
                             <div className='col-md-4'>
                                 <Booking rental={rental}/>

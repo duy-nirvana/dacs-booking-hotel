@@ -89,8 +89,30 @@ export const createBooking = (booking) => {
     .catch(({response}) => Promise.reject(response.data.errors))
 }
 
-export const createRental = (rental) => {
-    return axiosInstance.post('/rentals',rental).then(
+export const createRental = (rental, isFormData) => {
+    let submitRetail = rental;
+    if (isFormData) {
+        submitRetail = new FormData();
+        for (const key in rental) {
+            const fieldValue = rental[key];
+            if (fieldValue instanceof File) {
+                submitRetail.append("image", fieldValue);
+                continue;
+            }
+
+            submitRetail.set(key, fieldValue);
+        }
+    }
+    console.log("submitRetail: ", submitRetail);
+    const token = authService.getToken();
+
+    return axios.post("http://localhost:3000/api/v1/rentals", submitRetail, {
+
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+        }
+    }).then(
         res => res.data,
         err => Promise.reject(err.response.data.errors)
     )

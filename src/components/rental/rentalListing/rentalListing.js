@@ -44,7 +44,6 @@ function RentalListing(props){
         
     }, [])
 
-    console.log(props.rentals);
     
     return (
         <div>
