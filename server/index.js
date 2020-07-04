@@ -29,16 +29,16 @@ const app = express();
 app.use(bodyParser.json());
 
 // middlewares
-app.use('/api/v1/rentals',rentalRoutes);
-app.use('/api/v1/users',userRoutes);
+app.use('/api/v1/rentals', rentalRoutes);
+app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
 
+// upload image from create rental
 app.get("/api/v1/files/:name", (req, res, next) => {
     const filePath = pathNode.join(__dirname, "uploads", req.params.name);
     console.log("filePath: ", filePath);
     
     res.download(filePath);
-
 })
 
 if(process.env.NODE_ENV === 'production'){

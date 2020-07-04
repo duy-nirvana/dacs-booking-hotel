@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import shiba3 from '../../../styles/img/shiba3.jpg'
 
 class RentalCreate extends Component {
-
     constructor() {
         super();
 

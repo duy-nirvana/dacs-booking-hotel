@@ -48,7 +48,7 @@ class Booking extends Component {
         }
     }
 
-    // this function getting date from calandar event
+    // this function getting date from calendar event
     checkInalidDates(date){
         return this.bookedOutDates.includes(date.format('YYYY-MM-DD')) || date.diff(moment(), 'days') < 0;
     }

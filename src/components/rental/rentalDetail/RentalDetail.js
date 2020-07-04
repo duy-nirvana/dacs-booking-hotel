@@ -57,7 +57,6 @@ class RentalDetail extends Component {
     }
 
     render() {
-        
         const { rental, errors } = this.props;
 
         const imageUrl = (pathString) => {
@@ -68,14 +67,14 @@ class RentalDetail extends Component {
     
             return fileName;
         }
-        
+
         if(rental._id){
             return (
                 <section id='rentalDetails'>
                     <div className='upper-section'>
                         <div className='row'>
                             <div className='col-md-4'>
-                                <img src={imageUrl(rental.image)} alt=''/>
+                                <img className="rounded" src={imageUrl(rental.image)} alt=''/>
                             </div>
                             
                         </div>

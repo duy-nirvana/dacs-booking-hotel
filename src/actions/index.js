@@ -22,7 +22,6 @@ import {
 } from './types';
 
 // ACTION CREATORS
-
 const axiosInstance = AxiosService.getInstance();
 
 const fetchRentalsInit = () => {
